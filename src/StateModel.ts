@@ -1,3 +1,4 @@
+import * as Immutable from "immutable";
 import {IStateModel} from "./Presenter";
 
 /**
@@ -5,6 +6,7 @@ import {IStateModel} from "./Presenter";
  **/
 export interface IProject
 {
+    items: Immutable.List<string>;
 }
 
 /**
@@ -13,21 +15,19 @@ export interface IProject
  */
 export default class StateModel implements IStateModel
 {
+    todoInput: string;
+    selected: Immutable.Set<number>;
     project: IProject;
-    temp: number;
     
     constructor()
     {
-        this.temp = 0;
+        this.todoInput = "hello";
+        this.selected = Immutable.Set<number>();
     }
     
-    clickHoge()
+    toggleSelect(index: number)
     {
-        this.temp = Math.round(Math.random() * 100);
-    }
-    
-    get hoge()
-    {
-        return  "rgegergre";
+        if (this.selected.has(index)) this.selected = this.selected.remove(index);
+        else this.selected = this.selected.add(index);
     }
 }

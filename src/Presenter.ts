@@ -1,10 +1,14 @@
-import Coordinator from "./Coordinator";
+import * as React from "react";
+import {Coordinator} from "./Coordinator";
 import {IProject} from "./StateModel";
+
+import {ItemComponentProps} from "./components/RootComponent";
 
 export class IStateModel
 {
     project: IProject;
-    temp: number;
+    todoInput: string;
+    selected: Immutable.Set<number>;
 }
 
 /**
@@ -17,14 +21,19 @@ export default class Presenter
     {
     }
     
-    get hoge()
+    get todoInput()
     {
-        return {
-            props: {
-                style: {cursor: "pointer"},
-                onClick: () => Coordinator.onClickTest()
-            },
-            text: `point: ${this._state.temp}`
-        };
+        return this._state.todoInput;
+    }
+    
+    get items(): ItemComponentProps[]
+    {
+        return this._state.project.items.map((item, index) => {
+            return {
+                text: item,
+                index: index,
+                selected: this._state.selected.has(index),
+            };
+        }).toArray();
     }
 }

@@ -2,10 +2,10 @@
   "name": "",
   "version": "1.0.0",
   "description": "IoT device dashboard",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
     "compile": "tsc -p .",
-    "link": "browserify obj/main.js -o html/bundle.js --debug"
+    "link": "browserify obj/application.js -o html/bundle.js --debug"
   },
   "author": "hiram-k",
   "license": "Unlicense",
