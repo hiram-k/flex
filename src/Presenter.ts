@@ -1,3 +1,4 @@
+import Coordinator from "./Coordinator";
 import {IProject} from "./StateModel";
 
 export class IStateModel
@@ -19,7 +20,10 @@ export default class Presenter
     get hoge()
     {
         return {
-            style: {cursor: "pointer"},
+            props: {
+                style: {cursor: "pointer"},
+                onClick: () => Coordinator.onClickTest()
+            },
             text: `point: ${this._state.temp}`
         };
     }

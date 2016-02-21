@@ -18,7 +18,7 @@ export default class RootComponent extends React.Component<{}, {presenter: Prese
     private _render(presenter: Presenter)
     {
         return (
-            <p onClick={() => Coordinator.onClickTest()} style={presenter.hoge.style}>
+            <p {...presenter.hoge.props}>
                 {presenter.hoge.text}
             </p>
         );        
