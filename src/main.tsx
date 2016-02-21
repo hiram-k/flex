@@ -1,22 +1,6 @@
 "use strict";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import RootComponent from "./components/RootComponent";
 
-class RootView extends React.Component<{}, {}>
-{
-    constructor()
-    {
-        super();
-    }
-    
-    public componentDidMount()
-    {
-    }
-    
-    public render()
-    {
-        return (<div id="root">hello</div>)
-    }
-}
-
-ReactDOM.render(<RootView />, document.getElementById("root-wrapper"));
+ReactDOM.render(<RootComponent />, document.getElementById("root-wrapper"));
