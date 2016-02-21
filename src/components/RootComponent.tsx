@@ -1,28 +1,35 @@
 import * as React from "react";
 import {Coordinator} from "../Coordinator";
 import Presenter from "../Presenter";
+import {ItemComponent} from "./ItemComponent";
 
-export interface ItemComponentProps
+class TodoInputTextBox extends React.Component<{}, {text: string}>
 {
-    key?: string;
-    index: number;
-    text: string;
-    selected: boolean;
-}
-class ItemComponent extends React.Component<{key?: string, item: ItemComponentProps}, {}>
-{
-    render()
+    componentWillMount()
     {
-        return this._render(this.props.item);
+        this.setState({text: ""});
     }
     
-    private _render(props: ItemComponentProps)
+    onChange(evt: any)
     {
-        const style = props.selected ? {fontSize: "4em"} : {fontSize: "1em"};
+        this.setState({text: evt.target.value});
+    }
+    
+    onKeyDown(evt: any)
+    {
+        if (evt.key != "Enter") return;
+        Coordinator.addTodo(this.state.text);
+        this.setState({text: ""});
+    }
+    
+    render()
+    {
         return (
-            <li style = {style} onClick = {() => Coordinator.toggleSelect(props.index)} >
-                {props.text}
-            </li>
+            <input
+                onKeyDown={evt => this.onKeyDown(evt)}
+                onChange={evt => this.onChange(evt)}
+                value={this.state.text}
+            />
         );
     }
 }
@@ -45,11 +52,7 @@ export default class RootComponent extends React.Component<{}, {presenter: Prese
         const items = presenter.items.map(item => <ItemComponent key={item.text} item={item} />);
         return (
             <div>
-                <input
-                    onKeyDown={Coordinator.onKeyDownTodoInput}
-                    onChange={Coordinator.onChangeTodoInput}
-                    value={presenter.todoInput}
-                />
+                <TodoInputTextBox />
                 <input type="button" value="undo" onClick={() => Coordinator.undo()} />
                 <input type="button" value="redo" onClick={() => Coordinator.redo()} />
                 <ul>{items}</ul>

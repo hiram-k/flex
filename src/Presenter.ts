@@ -2,12 +2,11 @@ import * as React from "react";
 import {Coordinator} from "./Coordinator";
 import {IProject} from "./StateModel";
 
-import {ItemComponentProps} from "./components/RootComponent";
+import {ItemComponentProps} from "./components/ItemComponent";
 
 export class IStateModel
 {
     project: IProject;
-    todoInput: string;
     selected: Immutable.Set<number>;
 }
 
@@ -19,11 +18,6 @@ export default class Presenter
 {
     constructor(private _state: IStateModel)
     {
-    }
-    
-    get todoInput()
-    {
-        return this._state.todoInput;
     }
     
     get items(): ItemComponentProps[]

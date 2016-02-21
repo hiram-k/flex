@@ -21,18 +21,9 @@ export namespace Coordinator
         applyState();
     }
     
-    export function onChangeTodoInput(evt: any)
+    export function addTodo(todo: string)
     {
-        state.todoInput = evt.target.value as string;
-        applyState();
-    }
-    
-    export function onKeyDownTodoInput(evt: any)
-    {
-        if (evt.key != "Enter") return;
-        const todo = evt.target.value as string;
         history.do(project => project.addItem(todo));
-        state.todoInput = "";
         applyState();
     }
     

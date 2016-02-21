@@ -15,13 +15,11 @@ export interface IProject
  */
 export default class StateModel implements IStateModel
 {
-    todoInput: string;
     selected: Immutable.Set<number>;
     project: IProject;
     
     constructor()
     {
-        this.todoInput = "hello";
         this.selected = Immutable.Set<number>();
     }
     
